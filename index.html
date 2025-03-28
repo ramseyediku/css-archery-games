@@ -8,13 +8,27 @@
     <link rel="stylesheet" href="src/CSS/style.css" />
   </head>
   <body>
-    <main class="console">
-      <div class="console__screen console__screen--screen-1">
+    <form class="console">
+      <input type="radio" name="screen" id="screen-1" checked />
+      <input type="radio" name="screen" id="screen-2" />
+      <input type="radio" name="screen" id="screen-3" />
+
+      <section class="console__screen console__screen--screen-1">
         <div>
           <h1 class="title">Bowmaster Legends</h1>
-          <label for="">Start Game</label>
+          <label for="screen-2">Start Game</label>
         </div>
-      </div>
-    </main>
+      </section>
+
+      <section class="console__screen console__screen--screen-2">
+        <div>
+          <label for="screen-3">hi</label>
+        </div>
+      </section>
+
+      <section class="console__screen console__screen--screen-3">
+        <label for="screen-1">game end</label>
+      </section>
+    </form>
   </body>
 </html>

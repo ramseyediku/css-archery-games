@@ -3,8 +3,20 @@
 :root {
   --clr-dark: hsl(240, 4%, 16%);
   --clr-light: hsl(0, 0%, 100%);
+  --clr-accent: hsl(0, 100%, 63%);
 
   --border-radius: 35px;
+}
+
+input[name="screen"] {
+  display: none;
+
+  &#screen-1:checked ~ .console__screen--screen-1,
+  &#screen-2:checked ~ .console__screen--screen-2,
+  &#screen-3:checked ~ .console__screen--screen-3 {
+    opacity: 1;
+    pointer-events: revert;
+  }
 }
 
 body {
@@ -37,13 +49,17 @@ body {
   }
 
   &__screen {
+    position: absolute;
+    inset: 2.5% 8% 2.5% 1.5%;
     background-image: url("../IMG/bgc.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-
     border-radius: calc(var(--border-radius) / 2);
-    width: 93.5%;
-    height: 100%;
+
+    // by default all screens should be turned off (opacity 0) and then turned on when needed
+    opacity: 0;
+
+    pointer-events: none;
 
     &--screen-1 {
       display: grid;
@@ -61,10 +77,11 @@ h1 {
 .title {
   color: var(--clr-dark);
   margin-bottom: 1em;
+  font-size: 3rem;
 }
 
 label {
-  background-color: rgb(255, 68, 68);
+  background-color: var(--clr-accent);
   color: var(--clr-light);
   border-radius: var(--border-radius);
   padding: 1em 3em;
