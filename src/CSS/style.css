@@ -125,19 +125,19 @@ time[datetime*=":"] {
   --border-radius: 35px;
 }
 
+body {
+  background-color: hsl(240, 4%, 16%);
+  display: grid;
+  place-items: center;
+  height: 99vh;
+}
+
 input[name=screen] {
   display: none;
 }
 input[name=screen]#screen-1:checked ~ .console__screen--screen-1, input[name=screen]#screen-2:checked ~ .console__screen--screen-2, input[name=screen]#screen-3:checked ~ .console__screen--screen-3 {
   opacity: 1;
   pointer-events: revert;
-}
-
-body {
-  background-color: hsl(240, 4%, 16%);
-  display: grid;
-  place-items: center;
-  height: 99vh;
 }
 
 .console {
@@ -175,6 +175,12 @@ body {
   display: grid;
   place-items: center;
 }
+.console__screen__game {
+  position: relative;
+  container-type: size;
+  width: 100%;
+  height: 100%;
+}
 
 label,
 h1 {
@@ -197,6 +203,62 @@ label {
   outline: 2px solid var(--clr-light);
   width: max-content;
   margin-inline: auto;
+  font-weight: 600;
+}
+
+.target {
+  --target-width: 2em;
+  --target-spacing: 5px;
+  position: absolute;
+  appearance: none;
+  background-color: var(--clr-accent);
+  width: var(--target-width);
+  cursor: pointer;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  margin: 0;
+  box-shadow: var(--clr-light) 0px 0px 0px var(--target-spacing), var(--clr-accent) 0px 0px 0px calc(var(--target-spacing) * 2), var(--clr-light) 0px 0px 0px calc(var(--target-spacing) * 3), var(--clr-accent) 0px 0px 0px calc(var(--target-spacing) * 4);
+  transform: translate(calc(var(--translate-X) - (2em + var(--target-spacing) * 4)), calc(var(--translate-Y) - (2em + var(--target-spacing) * 4)));
+}
+.target:nth-child(1) {
+  --translate-X: 71cqi;
+  --translate-Y: 35cqh;
+}
+.target:nth-child(2) {
+  --translate-X: 25cqi;
+  --translate-Y: 28cqh;
+}
+.target:nth-child(3) {
+  --translate-X: 29cqi;
+  --translate-Y: 17cqh;
+}
+.target:nth-child(4) {
+  --translate-X: 20cqi;
+  --translate-Y: 85cqh;
+}
+.target:nth-child(5) {
+  --translate-X: 89cqi;
+  --translate-Y: 80cqh;
+}
+.target:nth-child(6) {
+  --translate-X: 38cqi;
+  --translate-Y: 24cqh;
+}
+.target:nth-child(7) {
+  --translate-X: 68cqi;
+  --translate-Y: 94cqh;
+}
+.target:nth-child(8) {
+  --translate-X: 1cqi;
+  --translate-Y: 39cqh;
+}
+.target:nth-child(9) {
+  --translate-X: 37cqi;
+  --translate-Y: 6cqh;
+}
+.target:nth-child(10) {
+  --translate-X: 8cqi;
+  --translate-Y: 42cqh;
 }
 
 /*# sourceMappingURL=style.css.map */
