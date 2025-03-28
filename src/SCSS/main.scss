@@ -1,0 +1,75 @@
+@use "reset";
+
+:root {
+  --clr-dark: hsl(240, 4%, 16%);
+  --clr-light: hsl(0, 0%, 100%);
+
+  --border-radius: 35px;
+}
+
+body {
+  background-color: hsl(240, 4%, 16%);
+  display: grid;
+  place-items: center;
+  height: 99vh;
+}
+
+.console {
+  width: 60%;
+  height: 60vh;
+  margin-inline: auto;
+  border-radius: var(--border-radius);
+  background-color: rgb(29, 29, 29);
+  padding: 1em;
+  position: relative;
+
+  &::after {
+    --console-button-width: 3em;
+    content: "";
+    position: absolute;
+    width: var(--console-button-width);
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    outline: solid 1px var(--clr-light);
+    right: 1.75%;
+    bottom: calc(50% - calc(var(--console-button-width) / 2));
+    cursor: pointer;
+  }
+
+  &__screen {
+    background-image: url("../IMG/bgc.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    border-radius: calc(var(--border-radius) / 2);
+    width: 93.5%;
+    height: 100%;
+
+    &--screen-1 {
+      display: grid;
+      place-items: center;
+    }
+  }
+}
+
+label,
+h1 {
+  margin: 0;
+  display: block;
+}
+
+.title {
+  color: var(--clr-dark);
+  margin-bottom: 1em;
+}
+
+label {
+  background-color: rgb(255, 68, 68);
+  color: var(--clr-light);
+  border-radius: var(--border-radius);
+  padding: 1em 3em;
+  cursor: pointer;
+  outline: 2px solid var(--clr-light);
+  width: max-content;
+  margin-inline: auto;
+}
