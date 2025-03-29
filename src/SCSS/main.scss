@@ -124,11 +124,14 @@ label {
     calc(var(--translate-Y) - (2em + var(--target-spacing) * 4))
   );
 
+  // transform: translate(calc(1cqi - calc(2em + 20px)));
+
   @for $o from 1 through 10 {
     // place targets in random positions
     &:nth-child(#{$o}) {
-      --translate-X: #{random(100)}cqi;
-      --translate-Y: #{random(100)}cqh;
+      // for now hard code trasnlate x and y to magic numbers that will make sure the targetrs are within the screen
+      --translate-X: #{random(80) + 20}cqi;
+      --translate-Y: #{random(80) + 20}cqh;
     }
   }
 }
