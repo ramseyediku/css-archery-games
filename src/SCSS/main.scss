@@ -66,7 +66,13 @@ input[name="screen"] {
       place-items: center;
     }
 
-    &--screen-2 {
+    input[name="screen"]#screen-2:checked ~ &--screen-2 {
+      .target {
+        animation-play-state: running;
+        &:checked {
+          display: none;
+        }
+      }
     }
 
     &__game {
@@ -119,19 +125,50 @@ label {
     var(--clr-light) 0px 0px 0px calc(var(--target-spacing) * 3),
     var(--clr-accent) 0px 0px 0px calc(var(--target-spacing) * 4);
 
-  transform: translate(
-    calc(var(--translate-X) - (2em + var(--target-spacing) * 4)),
-    calc(var(--translate-Y) - (2em + var(--target-spacing) * 4))
-  );
+  translate: calc(var(--translate-X) - (2em + var(--target-spacing) * 4))
+    calc(var(--translate-Y) - (2em + var(--target-spacing) * 4));
 
-  // transform: translate(calc(1cqi - calc(2em + 20px)));
+  scale: 0;
 
-  @for $o from 1 through 10 {
+  @for $o from 1 through 3 {
     // place targets in random positions
     &:nth-child(#{$o}) {
       // for now hard code trasnlate x and y to magic numbers that will make sure the targetrs are within the screen
       --translate-X: #{random(80) + 20}cqi;
       --translate-Y: #{random(80) + 20}cqh;
+      $target-life-span: 1;
+      // fix timing functions to be perfectly in sync one after the other
+      $delay-between-targets: 0.75;
+
+      @if $o == 1 {
+        $target-delay: #{$o}s;
+        animation: appear #{$target-life-span}s linear $target-delay forwards;
+      } @else {
+        $target-delay: #{$o - 1 + $target-life-span + $delay-between-targets}s;
+        animation: appear #{$target-life-span}s linear $target-delay forwards;
+      }
+
+      animation-play-state: paused;
     }
+  }
+}
+
+@keyframes appear {
+  from {
+    scale: (0);
+  }
+
+  to {
+    scale: (1);
+  }
+}
+
+@keyframes disappear {
+  from {
+    scale: (1);
+  }
+
+  to {
+    scale: (0);
   }
 }

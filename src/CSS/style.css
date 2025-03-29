@@ -175,6 +175,12 @@ input[name=screen]#screen-1:checked ~ .console__screen--screen-1, input[name=scr
   display: grid;
   place-items: center;
 }
+input[name=screen]#screen-2:checked ~ .console__screen--screen-2 .target {
+  animation-play-state: running;
+}
+input[name=screen]#screen-2:checked ~ .console__screen--screen-2 .target:checked {
+  display: none;
+}
 .console__screen__game {
   position: relative;
   container-type: size;
@@ -218,47 +224,43 @@ label {
   border-radius: 50%;
   margin: 0;
   box-shadow: var(--clr-light) 0px 0px 0px var(--target-spacing), var(--clr-accent) 0px 0px 0px calc(var(--target-spacing) * 2), var(--clr-light) 0px 0px 0px calc(var(--target-spacing) * 3), var(--clr-accent) 0px 0px 0px calc(var(--target-spacing) * 4);
-  transform: translate(calc(var(--translate-X) - (2em + var(--target-spacing) * 4)), calc(var(--translate-Y) - (2em + var(--target-spacing) * 4)));
+  translate: calc(var(--translate-X) - (2em + var(--target-spacing) * 4)) calc(var(--translate-Y) - (2em + var(--target-spacing) * 4));
+  scale: 0;
 }
 .target:nth-child(1) {
-  --translate-X: 26cqi;
+  --translate-X: 48cqi;
   --translate-Y: 24cqh;
+  animation: appear 1s linear 1s forwards;
+  animation-play-state: paused;
 }
 .target:nth-child(2) {
-  --translate-X: 23cqi;
-  --translate-Y: 96cqh;
+  --translate-X: 53cqi;
+  --translate-Y: 57cqh;
+  animation: appear 1s linear 2.75s forwards;
+  animation-play-state: paused;
 }
 .target:nth-child(3) {
-  --translate-X: 62cqi;
-  --translate-Y: 88cqh;
-}
-.target:nth-child(4) {
-  --translate-X: 94cqi;
-  --translate-Y: 34cqh;
-}
-.target:nth-child(5) {
-  --translate-X: 25cqi;
+  --translate-X: 45cqi;
   --translate-Y: 62cqh;
+  animation: appear 1s linear 3.75s forwards;
+  animation-play-state: paused;
 }
-.target:nth-child(6) {
-  --translate-X: 57cqi;
-  --translate-Y: 48cqh;
+
+@keyframes appear {
+  from {
+    scale: 0;
+  }
+  to {
+    scale: 1;
+  }
 }
-.target:nth-child(7) {
-  --translate-X: 61cqi;
-  --translate-Y: 33cqh;
-}
-.target:nth-child(8) {
-  --translate-X: 77cqi;
-  --translate-Y: 87cqh;
-}
-.target:nth-child(9) {
-  --translate-X: 62cqi;
-  --translate-Y: 23cqh;
-}
-.target:nth-child(10) {
-  --translate-X: 23cqi;
-  --translate-Y: 54cqh;
+@keyframes disappear {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 0;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
