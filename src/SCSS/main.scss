@@ -9,12 +9,13 @@
   --border-radius: 35px;
 }
 
+$score: 0;
+
 body {
   background-color: var(--clr-dark);
   display: grid;
   place-items: center;
   height: 99vh;
-
   counter-reset: score;
 }
 
@@ -68,20 +69,24 @@ input[name="screen"] {
       place-items: center;
     }
 
-    input[name="screen"]#screen-2:checked ~ &--screen-2 {
-      .target {
-        animation-play-state: running;
-        &:checked {
-          display: none;
-        }
-      }
-    }
-
     &__game {
       position: relative;
       container-type: size;
       width: 100%;
       height: 100%;
+    }
+
+    input[name="screen"]#screen-2:checked ~ &--screen-2 {
+      .target {
+        animation-play-state: running;
+
+        &:checked {
+          $score: $score + 1;
+          @debug $score;
+          display: none;
+          animation-play-state: paused;
+        }
+      }
     }
 
     input[name="screen"]#screen-2:checked ~ &--screen-3 {
@@ -196,12 +201,17 @@ button {
 }
 
 .highscore {
-  display: abs;
+  $score: 0;
+  counter-increment: score;
   font-weight: 700;
   font-size: 3rem;
   color: var(--clr-light);
 
-  // &::after {
-  //   content: " " counter(score);
-  // }
+  &::after {
+    content: " " counter(score);
+  }
+}
+
+@function finalScore($n) {
+  @return $n + 1;
 }
