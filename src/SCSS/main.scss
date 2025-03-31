@@ -1,6 +1,7 @@
 @use "reset";
 
 :root {
+  // css custom properties
   --clr-dark: hsl(240, 4%, 16%);
   --clr-dark-console: hsl(0, 0%, 11%);
   --clr-light: hsl(0, 0%, 100%);
@@ -10,6 +11,25 @@
 }
 
 $score: 0;
+$no-of-targets: 10;
+$target-life-span: 1;
+// fix timing functions to be perfectly in sync one after the other
+$delay-between-targets: 0.75;
+
+@function gameDuration(
+  $no-of-targets,
+  $target-life-span,
+  $delay-between-targets
+) {
+  $targets-life-span: 0;
+
+  @for $o from 2 through $no-of-targets {
+    $targets-life-span: $o - 1 + $target-life-span + $delay-between-targets;
+  }
+
+  $game-duration: $target-life-span + $targets-life-span + 2;
+  @return $game-duration;
+}
 
 body {
   background-color: var(--clr-dark);
@@ -81,8 +101,6 @@ input[name="screen"] {
         animation-play-state: running;
 
         &:checked {
-          $score: $score + 1;
-          @debug $score;
           display: none;
           animation-play-state: paused;
         }
@@ -90,10 +108,15 @@ input[name="screen"] {
     }
 
     input[name="screen"]#screen-2:checked ~ &--screen-3 {
+      $duration: gameDuration(
+        $no-of-targets,
+        $target-life-span,
+        $delay-between-targets
+      );
       display: grid;
       place-items: center;
       // end screen animation will kick in when all target animations are finishe aka we finished the game (for now it is an hard coded value)
-      animation: screenEnd 0.5s 10s forwards;
+      animation: screenEnd 0.5s #{$duration}s forwards;
 
       @keyframes screenEnd {
         100% {
@@ -127,15 +150,12 @@ input[name="screen"] {
 
   scale: 0;
 
-  @for $o from 1 through 10 {
+  @for $o from 1 through $no-of-targets {
     // place targets in random positions
     &:nth-child(#{$o}) {
       // for now hard code trasnlate x and y to magic numbers that will make sure the targetrs are within the screen
       --translate-X: #{random(80) + 20}cqi;
       --translate-Y: #{random(80) + 20}cqh;
-      $target-life-span: 1;
-      // fix timing functions to be perfectly in sync one after the other
-      $delay-between-targets: 0.75;
 
       @if $o == 1 {
         $target-delay: #{$o}s;
@@ -144,7 +164,7 @@ input[name="screen"] {
         $target-delay: #{$o - 1 + $target-life-span + $delay-between-targets}s;
         animation: appear #{$target-life-span}s linear $target-delay forwards;
       }
-
+      $scorea: 0;
       animation-play-state: paused;
     }
   }

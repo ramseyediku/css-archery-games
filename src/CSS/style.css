@@ -193,7 +193,7 @@ input[name=screen]#screen-2:checked ~ .console__screen--screen-2 .target:checked
 input[name=screen]#screen-2:checked ~ .console__screen--screen-3 {
   display: grid;
   place-items: center;
-  animation: screenEnd 0.5s 10s forwards;
+  animation: screenEnd 0.5s 13.75s forwards;
 }
 @keyframes screenEnd {
   100% {
@@ -218,62 +218,62 @@ input[name=screen]#screen-2:checked ~ .console__screen--screen-3 {
   scale: 0;
 }
 .target:nth-child(1) {
-  --translate-X: 31cqi;
-  --translate-Y: 78cqh;
+  --translate-X: 33cqi;
+  --translate-Y: 40cqh;
   animation: appear 1s linear 1s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(2) {
-  --translate-X: 74cqi;
-  --translate-Y: 28cqh;
+  --translate-X: 31cqi;
+  --translate-Y: 46cqh;
   animation: appear 1s linear 2.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(3) {
-  --translate-X: 98cqi;
-  --translate-Y: 67cqh;
+  --translate-X: 82cqi;
+  --translate-Y: 30cqh;
   animation: appear 1s linear 3.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(4) {
-  --translate-X: 73cqi;
-  --translate-Y: 70cqh;
+  --translate-X: 45cqi;
+  --translate-Y: 43cqh;
   animation: appear 1s linear 4.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(5) {
-  --translate-X: 57cqi;
-  --translate-Y: 98cqh;
+  --translate-X: 96cqi;
+  --translate-Y: 25cqh;
   animation: appear 1s linear 5.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(6) {
-  --translate-X: 47cqi;
-  --translate-Y: 35cqh;
+  --translate-X: 57cqi;
+  --translate-Y: 90cqh;
   animation: appear 1s linear 6.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(7) {
-  --translate-X: 30cqi;
-  --translate-Y: 38cqh;
+  --translate-X: 70cqi;
+  --translate-Y: 71cqh;
   animation: appear 1s linear 7.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(8) {
-  --translate-X: 48cqi;
-  --translate-Y: 37cqh;
+  --translate-X: 92cqi;
+  --translate-Y: 46cqh;
   animation: appear 1s linear 8.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(9) {
-  --translate-X: 36cqi;
-  --translate-Y: 99cqh;
+  --translate-X: 94cqi;
+  --translate-Y: 50cqh;
   animation: appear 1s linear 9.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(10) {
-  --translate-X: 42cqi;
-  --translate-Y: 36cqh;
+  --translate-X: 44cqi;
+  --translate-Y: 44cqh;
   animation: appear 1s linear 10.75s forwards;
   animation-play-state: paused;
 }
