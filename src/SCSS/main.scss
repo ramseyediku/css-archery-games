@@ -10,7 +10,6 @@
   --border-radius: 35px;
 }
 
-$score: 0;
 $no-of-targets: 10;
 $target-life-span: 1;
 // fix timing functions to be perfectly in sync one after the other
@@ -40,7 +39,7 @@ body {
 }
 
 input[name="screen"] {
-  display: none;
+  visibility: hidden;
 
   &#screen-1:checked ~ .console__screen--screen-1,
   &#screen-2:checked ~ .console__screen--screen-2,
@@ -73,6 +72,7 @@ input[name="screen"] {
   }
 
   &__screen {
+    border: solid 1px red;
     position: absolute;
     inset: 2.5% 8% 2.5% 1.5%;
     background-image: url("../IMG/bgc.jpg");
@@ -91,7 +91,6 @@ input[name="screen"] {
 
     &__game {
       position: relative;
-      container-type: size;
       width: 100%;
       height: 100%;
     }
@@ -99,11 +98,6 @@ input[name="screen"] {
     input[name="screen"]#screen-2:checked ~ &--screen-2 {
       .target {
         animation-play-state: running;
-
-        &:checked {
-          display: none;
-          animation-play-state: paused;
-        }
       }
     }
 
@@ -113,6 +107,7 @@ input[name="screen"] {
         $target-life-span,
         $delay-between-targets
       );
+
       display: grid;
       place-items: center;
       // end screen animation will kick in when all target animations are finishe aka we finished the game (for now it is an hard coded value)
@@ -154,8 +149,8 @@ input[name="screen"] {
     // place targets in random positions
     &:nth-child(#{$o}) {
       // for now hard code trasnlate x and y to magic numbers that will make sure the targetrs are within the screen
-      --translate-X: #{random(80) + 20}cqi;
-      --translate-Y: #{random(80) + 20}cqh;
+      --translate-X: #{random(80) + 20};
+      --translate-Y: #{random(80) + 20};
 
       @if $o == 1 {
         $target-delay: #{$o}s;
@@ -164,29 +159,24 @@ input[name="screen"] {
         $target-delay: #{$o - 1 + $target-life-span + $delay-between-targets}s;
         animation: appear #{$target-life-span}s linear $target-delay forwards;
       }
-      $scorea: 0;
       animation-play-state: paused;
     }
   }
-}
 
-@keyframes appear {
-  from {
-    scale: (0);
-  }
-
-  to {
-    scale: (1);
+  &:checked {
+    animation-play-state: paused;
+    counter-increment: score;
+    opacity: 0;
   }
 }
 
-@keyframes disappear {
-  from {
-    scale: (1);
-  }
+.highscore {
+  font-weight: 700;
+  font-size: 3rem;
+  color: var(--clr-light);
 
-  to {
-    scale: (0);
+  &::after {
+    content: " hit " counter(score) " out of 10 targets!";
   }
 }
 
@@ -220,18 +210,22 @@ button {
   border: 0;
 }
 
-.highscore {
-  $score: 0;
-  counter-increment: score;
-  font-weight: 700;
-  font-size: 3rem;
-  color: var(--clr-light);
+@keyframes appear {
+  from {
+    scale: (0);
+  }
 
-  &::after {
-    content: " " counter(score);
+  to {
+    scale: (1);
   }
 }
 
-@function finalScore($n) {
-  @return $n + 1;
+@keyframes disappear {
+  from {
+    scale: (1);
+  }
+
+  to {
+    scale: (0);
+  }
 }

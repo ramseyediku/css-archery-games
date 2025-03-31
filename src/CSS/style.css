@@ -135,7 +135,7 @@ body {
 }
 
 input[name=screen] {
-  display: none;
+  visibility: hidden;
 }
 input[name=screen]#screen-1:checked ~ .console__screen--screen-1, input[name=screen]#screen-2:checked ~ .console__screen--screen-2, input[name=screen]#screen-3:checked ~ .console__screen--screen-3 {
   opacity: 1;
@@ -164,6 +164,7 @@ input[name=screen]#screen-1:checked ~ .console__screen--screen-1, input[name=scr
   cursor: pointer;
 }
 .console__screen {
+  border: solid 1px red;
   position: absolute;
   inset: 2.5% 8% 2.5% 1.5%;
   background-image: url("../IMG/bgc.jpg");
@@ -179,16 +180,11 @@ input[name=screen]#screen-1:checked ~ .console__screen--screen-1, input[name=scr
 }
 .console__screen__game {
   position: relative;
-  container-type: size;
   width: 100%;
   height: 100%;
 }
 input[name=screen]#screen-2:checked ~ .console__screen--screen-2 .target {
   animation-play-state: running;
-}
-input[name=screen]#screen-2:checked ~ .console__screen--screen-2 .target:checked {
-  display: none;
-  animation-play-state: paused;
 }
 input[name=screen]#screen-2:checked ~ .console__screen--screen-3 {
   display: grid;
@@ -218,82 +214,80 @@ input[name=screen]#screen-2:checked ~ .console__screen--screen-3 {
   scale: 0;
 }
 .target:nth-child(1) {
-  --translate-X: 33cqi;
-  --translate-Y: 40cqh;
+  --translate-X: 66;
+  --translate-Y: 55;
   animation: appear 1s linear 1s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(2) {
-  --translate-X: 31cqi;
-  --translate-Y: 46cqh;
+  --translate-X: 31;
+  --translate-Y: 85;
   animation: appear 1s linear 2.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(3) {
-  --translate-X: 82cqi;
-  --translate-Y: 30cqh;
+  --translate-X: 39;
+  --translate-Y: 29;
   animation: appear 1s linear 3.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(4) {
-  --translate-X: 45cqi;
-  --translate-Y: 43cqh;
+  --translate-X: 35;
+  --translate-Y: 26;
   animation: appear 1s linear 4.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(5) {
-  --translate-X: 96cqi;
-  --translate-Y: 25cqh;
+  --translate-X: 55;
+  --translate-Y: 59;
   animation: appear 1s linear 5.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(6) {
-  --translate-X: 57cqi;
-  --translate-Y: 90cqh;
+  --translate-X: 79;
+  --translate-Y: 34;
   animation: appear 1s linear 6.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(7) {
-  --translate-X: 70cqi;
-  --translate-Y: 71cqh;
+  --translate-X: 83;
+  --translate-Y: 91;
   animation: appear 1s linear 7.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(8) {
-  --translate-X: 92cqi;
-  --translate-Y: 46cqh;
+  --translate-X: 26;
+  --translate-Y: 27;
   animation: appear 1s linear 8.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(9) {
-  --translate-X: 94cqi;
-  --translate-Y: 50cqh;
+  --translate-X: 41;
+  --translate-Y: 35;
   animation: appear 1s linear 9.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(10) {
-  --translate-X: 44cqi;
-  --translate-Y: 44cqh;
+  --translate-X: 90;
+  --translate-Y: 93;
   animation: appear 1s linear 10.75s forwards;
   animation-play-state: paused;
 }
+.target:checked {
+  animation-play-state: paused;
+  counter-increment: score;
+  opacity: 0;
+}
 
-@keyframes appear {
-  from {
-    scale: 0;
-  }
-  to {
-    scale: 1;
-  }
+.highscore {
+  font-weight: 700;
+  font-size: 3rem;
+  color: var(--clr-light);
 }
-@keyframes disappear {
-  from {
-    scale: 1;
-  }
-  to {
-    scale: 0;
-  }
+.highscore::after {
+  content: " hit " counter(score) " out of 10 targets!";
 }
+
 label,
 h1 {
   margin: 0;
@@ -323,14 +317,21 @@ button {
   border: 0;
 }
 
-.highscore {
-  counter-increment: score;
-  font-weight: 700;
-  font-size: 3rem;
-  color: var(--clr-light);
+@keyframes appear {
+  from {
+    scale: 0;
+  }
+  to {
+    scale: 1;
+  }
 }
-.highscore::after {
-  content: " " counter(score);
+@keyframes disappear {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 0;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
