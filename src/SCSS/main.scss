@@ -14,6 +14,8 @@ body {
   display: grid;
   place-items: center;
   height: 99vh;
+
+  counter-reset: score;
 }
 
 input[name="screen"] {
@@ -120,7 +122,7 @@ input[name="screen"] {
 
   scale: 0;
 
-  @for $o from 1 through 3 {
+  @for $o from 1 through 10 {
     // place targets in random positions
     &:nth-child(#{$o}) {
       // for now hard code trasnlate x and y to magic numbers that will make sure the targetrs are within the screen
@@ -173,6 +175,10 @@ h1 {
   color: var(--clr-dark);
   margin-bottom: 1em;
   font-size: 3rem;
+
+  span {
+    color: var(--clr-accent);
+  }
 }
 
 label,
@@ -187,4 +193,15 @@ button {
   margin-inline: auto;
   font-weight: 600;
   border: 0;
+}
+
+.highscore {
+  display: abs;
+  font-weight: 700;
+  font-size: 3rem;
+  color: var(--clr-light);
+
+  // &::after {
+  //   content: " " counter(score);
+  // }
 }

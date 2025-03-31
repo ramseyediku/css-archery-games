@@ -131,6 +131,7 @@ body {
   display: grid;
   place-items: center;
   height: 99vh;
+  counter-reset: score;
 }
 
 input[name=screen] {
@@ -216,21 +217,63 @@ input[name=screen]#screen-2:checked ~ .console__screen--screen-3 {
   scale: 0;
 }
 .target:nth-child(1) {
-  --translate-X: 78cqi;
-  --translate-Y: 70cqh;
+  --translate-X: 96cqi;
+  --translate-Y: 57cqh;
   animation: appear 1s linear 1s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(2) {
-  --translate-X: 42cqi;
-  --translate-Y: 60cqh;
+  --translate-X: 61cqi;
+  --translate-Y: 22cqh;
   animation: appear 1s linear 2.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(3) {
-  --translate-X: 44cqi;
-  --translate-Y: 30cqh;
+  --translate-X: 27cqi;
+  --translate-Y: 35cqh;
   animation: appear 1s linear 3.75s forwards;
+  animation-play-state: paused;
+}
+.target:nth-child(4) {
+  --translate-X: 58cqi;
+  --translate-Y: 62cqh;
+  animation: appear 1s linear 4.75s forwards;
+  animation-play-state: paused;
+}
+.target:nth-child(5) {
+  --translate-X: 77cqi;
+  --translate-Y: 81cqh;
+  animation: appear 1s linear 5.75s forwards;
+  animation-play-state: paused;
+}
+.target:nth-child(6) {
+  --translate-X: 47cqi;
+  --translate-Y: 92cqh;
+  animation: appear 1s linear 6.75s forwards;
+  animation-play-state: paused;
+}
+.target:nth-child(7) {
+  --translate-X: 70cqi;
+  --translate-Y: 65cqh;
+  animation: appear 1s linear 7.75s forwards;
+  animation-play-state: paused;
+}
+.target:nth-child(8) {
+  --translate-X: 44cqi;
+  --translate-Y: 88cqh;
+  animation: appear 1s linear 8.75s forwards;
+  animation-play-state: paused;
+}
+.target:nth-child(9) {
+  --translate-X: 86cqi;
+  --translate-Y: 38cqh;
+  animation: appear 1s linear 9.75s forwards;
+  animation-play-state: paused;
+}
+.target:nth-child(10) {
+  --translate-X: 56cqi;
+  --translate-Y: 82cqh;
+  animation: appear 1s linear 10.75s forwards;
   animation-play-state: paused;
 }
 
@@ -261,6 +304,9 @@ h1 {
   margin-bottom: 1em;
   font-size: 3rem;
 }
+.title span {
+  color: var(--clr-accent);
+}
 
 label,
 button {
@@ -274,6 +320,13 @@ button {
   margin-inline: auto;
   font-weight: 600;
   border: 0;
+}
+
+.highscore {
+  display: abs;
+  font-weight: 700;
+  font-size: 3rem;
+  color: var(--clr-light);
 }
 
 /*# sourceMappingURL=style.css.map */
