@@ -144,7 +144,7 @@ input[name=screen]#screen-1:checked ~ .console__screen--screen-1, input[name=scr
 
 .console {
   width: 60%;
-  height: 60vh;
+  min-height: 60%;
   margin-inline: auto;
   border-radius: var(--border-radius);
   background-color: var(--clr-dark-console);
@@ -164,7 +164,6 @@ input[name=screen]#screen-1:checked ~ .console__screen--screen-1, input[name=scr
   cursor: pointer;
 }
 .console__screen {
-  border: solid 1px red;
   position: absolute;
   inset: 2.5% 8% 2.5% 1.5%;
   background-image: url("../IMG/bgc.jpg");
@@ -210,66 +209,67 @@ input[name=screen]#screen-2:checked ~ .console__screen--screen-3 {
   border-radius: 50%;
   margin: 0;
   box-shadow: var(--clr-light) 0px 0px 0px var(--target-spacing), var(--clr-accent) 0px 0px 0px calc(var(--target-spacing) * 2), var(--clr-light) 0px 0px 0px calc(var(--target-spacing) * 3), var(--clr-accent) 0px 0px 0px calc(var(--target-spacing) * 4);
-  translate: calc(var(--translate-X) - (2em + var(--target-spacing) * 4)) calc(var(--translate-Y) - (2em + var(--target-spacing) * 4));
+  left: var(--x-pos);
+  bottom: var(--y-pos);
   scale: 0;
 }
 .target:nth-child(1) {
-  --translate-X: 66;
-  --translate-Y: 55;
+  --x-pos: 5%;
+  --y-pos: 45%;
   animation: appear 1s linear 1s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(2) {
-  --translate-X: 31;
-  --translate-Y: 85;
+  --x-pos: 50%;
+  --y-pos: 3%;
   animation: appear 1s linear 2.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(3) {
-  --translate-X: 39;
-  --translate-Y: 29;
+  --x-pos: 10%;
+  --y-pos: 34%;
   animation: appear 1s linear 3.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(4) {
-  --translate-X: 35;
-  --translate-Y: 26;
+  --x-pos: 67%;
+  --y-pos: 50%;
   animation: appear 1s linear 4.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(5) {
-  --translate-X: 55;
-  --translate-Y: 59;
+  --x-pos: 15%;
+  --y-pos: 47%;
   animation: appear 1s linear 5.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(6) {
-  --translate-X: 79;
-  --translate-Y: 34;
+  --x-pos: 28%;
+  --y-pos: 48%;
   animation: appear 1s linear 6.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(7) {
-  --translate-X: 83;
-  --translate-Y: 91;
+  --x-pos: 73%;
+  --y-pos: 53%;
   animation: appear 1s linear 7.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(8) {
-  --translate-X: 26;
-  --translate-Y: 27;
+  --x-pos: 47%;
+  --y-pos: 55%;
   animation: appear 1s linear 8.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(9) {
-  --translate-X: 41;
-  --translate-Y: 35;
+  --x-pos: 79%;
+  --y-pos: 17%;
   animation: appear 1s linear 9.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(10) {
-  --translate-X: 90;
-  --translate-Y: 93;
+  --x-pos: 2%;
+  --y-pos: 22%;
   animation: appear 1s linear 10.75s forwards;
   animation-play-state: paused;
 }
@@ -283,9 +283,10 @@ input[name=screen]#screen-2:checked ~ .console__screen--screen-3 {
   font-weight: 700;
   font-size: 3rem;
   color: var(--clr-light);
+  text-shadow: 2px 2px 2px var(--clr-accent);
 }
 .highscore::after {
-  content: " hit " counter(score) " out of 10 targets!";
+  content: " " counter(score) "/10. Well done!";
 }
 
 label,

@@ -1,4 +1,5 @@
 @use "reset";
+@use "sass:math";
 
 :root {
   // css custom properties
@@ -51,7 +52,7 @@ input[name="screen"] {
 
 .console {
   width: 60%;
-  height: 60vh;
+  min-height: 60%;
   margin-inline: auto;
   border-radius: var(--border-radius);
   background-color: var(--clr-dark-console);
@@ -72,7 +73,6 @@ input[name="screen"] {
   }
 
   &__screen {
-    border: solid 1px red;
     position: absolute;
     inset: 2.5% 8% 2.5% 1.5%;
     background-image: url("../IMG/bgc.jpg");
@@ -140,8 +140,8 @@ input[name="screen"] {
     var(--clr-light) 0px 0px 0px calc(var(--target-spacing) * 3),
     var(--clr-accent) 0px 0px 0px calc(var(--target-spacing) * 4);
 
-  translate: calc(var(--translate-X) - (2em + var(--target-spacing) * 4))
-    calc(var(--translate-Y) - (2em + var(--target-spacing) * 4));
+  left: var(--x-pos);
+  bottom: var(--y-pos);
 
   scale: 0;
 
@@ -149,8 +149,8 @@ input[name="screen"] {
     // place targets in random positions
     &:nth-child(#{$o}) {
       // for now hard code trasnlate x and y to magic numbers that will make sure the targetrs are within the screen
-      --translate-X: #{random(80) + 20};
-      --translate-Y: #{random(80) + 20};
+      --x-pos: #{random((60) + 25)}%;
+      --y-pos: #{random((60) + 25)}%;
 
       @if $o == 1 {
         $target-delay: #{$o}s;
@@ -174,9 +174,10 @@ input[name="screen"] {
   font-weight: 700;
   font-size: 3rem;
   color: var(--clr-light);
+  text-shadow: 2px 2px 2px var(--clr-accent);
 
   &::after {
-    content: " hit " counter(score) " out of 10 targets!";
+    content: " " counter(score) "/10. Well done!";
   }
 }
 
