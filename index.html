@@ -2,12 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="src/IMG/target.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bowmasters</title>
     <link rel="stylesheet" href="src/CSS/style.css" />
   </head>
   <body>
+    <img
+      class="logo"
+      src="src/IMG/target.png"
+      alt="this is the logo of the CSS mini game"
+    />
     <form method="get" action="" class="console">
       <input type="radio" name="screen" id="screen-1" checked />
       <input type="radio" name="screen" id="screen-2" />
@@ -15,8 +20,8 @@
 
       <section class="console__screen console__screen--screen-1">
         <div>
-          <h1 class="title"><span>B</span>owmaster <span>L</span>egends</h1>
-          <label for="screen-2">Start Game</label>
+          <h1 class="title">CSS Archery Games!</h1>
+          <label class="button" for="screen-2">Start Game</label>
         </div>
       </section>
 
@@ -36,8 +41,8 @@
       </section>
 
       <section class="console__screen console__screen--screen-3">
-        <div class="highscore">Score</div>
-        <button type="submit">Restart!</button>
+        <div class="score">Score</div>
+        <button class="button" type="submit">Restart!</button>
       </section>
     </form>
   </body>

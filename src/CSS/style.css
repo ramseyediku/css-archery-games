@@ -122,12 +122,33 @@ time[datetime*=":"] {
   --clr-dark: hsl(240, 4%, 16%);
   --clr-dark-console: hsl(0, 0%, 11%);
   --clr-light: hsl(0, 0%, 100%);
+  --clr-light-bg: hsl(0, 0%, 99%);
   --clr-accent: hsl(0, 100%, 63%);
   --border-radius: 35px;
+  --box-shadow: hsl(240, 30%, 28%, 0.25) 0px 50px 100px -20px,
+    hsl(0, 0%, 0%, 0.3) 0px 30px 60px -30px;
+  --text-shadow-light: 2px 2px 2px var(--clr-light);
+  --text-shadow-accent: 2px 2px 2px var(--clr-accent);
 }
 
+@keyframes appear {
+  from {
+    scale: 0;
+  }
+  to {
+    scale: 1;
+  }
+}
+@keyframes disappear {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 0;
+  }
+}
 body {
-  background-color: var(--clr-dark);
+  background-color: var(--clr-light-bg);
   display: grid;
   place-items: center;
   height: 99vh;
@@ -141,6 +162,20 @@ input[name=screen]#screen-1:checked ~ .console__screen--screen-1, input[name=scr
   opacity: 1;
   pointer-events: revert;
 }
+input[name=screen]#screen-2:checked ~ .console__screen--screen-2 .target {
+  animation-play-state: running;
+}
+input[name=screen]#screen-2:checked ~ .console__screen--screen-3 {
+  display: grid;
+  place-items: center;
+  animation: screenEnd 0.5s 13.75s forwards;
+}
+@keyframes screenEnd {
+  100% {
+    opacity: 1;
+    pointer-events: revert;
+  }
+}
 
 .console {
   width: 60%;
@@ -150,22 +185,11 @@ input[name=screen]#screen-1:checked ~ .console__screen--screen-1, input[name=scr
   background-color: var(--clr-dark-console);
   padding: 1em;
   position: relative;
-}
-.console::after {
-  --console-button-width: 3em;
-  content: "";
-  position: absolute;
-  width: var(--console-button-width);
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  outline: solid 1px var(--clr-light);
-  right: 1.75%;
-  bottom: calc(50% - var(--console-button-width) / 2);
-  cursor: pointer;
+  box-shadow: var(--box-shadow);
 }
 .console__screen {
   position: absolute;
-  inset: 2.5% 8% 2.5% 1.5%;
+  inset: 2.5%;
   background-image: url("../IMG/bgc.jpg");
   background-size: cover;
   background-repeat: no-repeat;
@@ -181,20 +205,6 @@ input[name=screen]#screen-1:checked ~ .console__screen--screen-1, input[name=scr
   position: relative;
   width: 100%;
   height: 100%;
-}
-input[name=screen]#screen-2:checked ~ .console__screen--screen-2 .target {
-  animation-play-state: running;
-}
-input[name=screen]#screen-2:checked ~ .console__screen--screen-3 {
-  display: grid;
-  place-items: center;
-  animation: screenEnd 0.5s 13.75s forwards;
-}
-@keyframes screenEnd {
-  100% {
-    opacity: 1;
-    pointer-events: revert;
-  }
 }
 
 .target {
@@ -214,62 +224,62 @@ input[name=screen]#screen-2:checked ~ .console__screen--screen-3 {
   scale: 0;
 }
 .target:nth-child(1) {
-  --x-pos: 5%;
+  --x-pos: 35%;
   --y-pos: 45%;
   animation: appear 1s linear 1s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(2) {
-  --x-pos: 50%;
-  --y-pos: 3%;
+  --x-pos: 19%;
+  --y-pos: 57%;
   animation: appear 1s linear 2.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(3) {
-  --x-pos: 10%;
-  --y-pos: 34%;
+  --x-pos: 76%;
+  --y-pos: 23%;
   animation: appear 1s linear 3.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(4) {
-  --x-pos: 67%;
-  --y-pos: 50%;
+  --x-pos: 57%;
+  --y-pos: 25%;
   animation: appear 1s linear 4.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(5) {
-  --x-pos: 15%;
-  --y-pos: 47%;
+  --x-pos: 38%;
+  --y-pos: 64%;
   animation: appear 1s linear 5.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(6) {
-  --x-pos: 28%;
-  --y-pos: 48%;
+  --x-pos: 42%;
+  --y-pos: 54%;
   animation: appear 1s linear 6.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(7) {
-  --x-pos: 73%;
-  --y-pos: 53%;
+  --x-pos: 46%;
+  --y-pos: 1%;
   animation: appear 1s linear 7.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(8) {
-  --x-pos: 47%;
-  --y-pos: 55%;
+  --x-pos: 30%;
+  --y-pos: 77%;
   animation: appear 1s linear 8.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(9) {
   --x-pos: 79%;
-  --y-pos: 17%;
+  --y-pos: 4%;
   animation: appear 1s linear 9.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(10) {
-  --x-pos: 2%;
-  --y-pos: 22%;
+  --x-pos: 54%;
+  --y-pos: 26%;
   animation: appear 1s linear 10.75s forwards;
   animation-play-state: paused;
 }
@@ -279,60 +289,45 @@ input[name=screen]#screen-2:checked ~ .console__screen--screen-3 {
   opacity: 0;
 }
 
-.highscore {
-  font-weight: 700;
-  font-size: 3rem;
-  color: var(--clr-light);
-  text-shadow: 2px 2px 2px var(--clr-accent);
-}
-.highscore::after {
-  content: " " counter(score) "/10. Well done!";
-}
-
-label,
-h1 {
-  margin: 0;
-  display: block;
+.logo {
+  width: 5em;
+  position: absolute;
+  top: 1%;
+  left: 1%;
 }
 
 .title {
-  color: var(--clr-dark);
-  margin-bottom: 1em;
-  font-size: 3rem;
-}
-.title span {
   color: var(--clr-accent);
+  margin: 0;
+  margin-bottom: 1em;
+  font-size: 4.25rem;
+  text-shadow: var(--text-shadow-light);
 }
 
-label,
-button {
+.button {
+  margin: 0;
+  display: block;
   background-color: var(--clr-accent);
   color: var(--clr-light);
   border-radius: var(--border-radius);
-  padding: 1em 3em;
+  padding: 0.9em 2.9em;
+  font-size: 1.125rem;
   cursor: pointer;
-  outline: 2px solid var(--clr-light);
+  outline: 3px solid var(--clr-light);
   width: max-content;
   margin-inline: auto;
   font-weight: 600;
   border: 0;
 }
 
-@keyframes appear {
-  from {
-    scale: 0;
-  }
-  to {
-    scale: 1;
-  }
+.score {
+  font-weight: 700;
+  font-size: 3rem;
+  color: var(--clr-light);
+  text-shadow: var(--text-shadow-accent);
 }
-@keyframes disappear {
-  from {
-    scale: 1;
-  }
-  to {
-    scale: 0;
-  }
+.score::after {
+  content: " " counter(score) "/10. Well done!";
 }
 
 /*# sourceMappingURL=style.css.map */
