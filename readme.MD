@@ -1,4 +1,4 @@
-# 🎯 Welcome to CSS Archer!
+# 🎯 Welcome to CSS Archery Games!
 
 CSS Archer is a **mini web-based game** where you shoot down targets using only CSS animations and interactions. Aim, shoot, and test your accuracy in this fun and minimalist archery challenge!
 
@@ -10,7 +10,7 @@ CSS Archer is a **mini web-based game** where you shoot down targets using only 
 - 🏆 **Scoring System** – Keeps track of your score for a single game session.
 
 ## 🚀 Live Demo on Codepen
-👉 View Live Demo on Codepen (Link will be updated once deployed...)
+👉 View Live Demo on Codepen: https://codepen.io/Ramsey1120/full/NPWePMY
 
 ## 💻 Technologies Used
 This project was built using the following technologies:
