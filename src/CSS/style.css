@@ -224,62 +224,62 @@ input[name=screen]#screen-2:checked ~ .console__screen--screen-3 {
   scale: 0;
 }
 .target:nth-child(1) {
-  --x-pos: 35%;
-  --y-pos: 45%;
+  --x-pos: 85%;
+  --y-pos: 83%;
   animation: appear 1s linear 1s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(2) {
-  --x-pos: 19%;
-  --y-pos: 57%;
+  --x-pos: 42%;
+  --y-pos: 28%;
   animation: appear 1s linear 2.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(3) {
-  --x-pos: 76%;
-  --y-pos: 23%;
+  --x-pos: 66%;
+  --y-pos: 39%;
   animation: appear 1s linear 3.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(4) {
-  --x-pos: 57%;
-  --y-pos: 25%;
+  --x-pos: 39%;
+  --y-pos: 33%;
   animation: appear 1s linear 4.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(5) {
-  --x-pos: 38%;
-  --y-pos: 64%;
+  --x-pos: 72%;
+  --y-pos: 4%;
   animation: appear 1s linear 5.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(6) {
-  --x-pos: 42%;
-  --y-pos: 54%;
+  --x-pos: 66%;
+  --y-pos: 85%;
   animation: appear 1s linear 6.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(7) {
-  --x-pos: 46%;
-  --y-pos: 1%;
+  --x-pos: 22%;
+  --y-pos: 13%;
   animation: appear 1s linear 7.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(8) {
-  --x-pos: 30%;
-  --y-pos: 77%;
+  --x-pos: 41%;
+  --y-pos: 31%;
   animation: appear 1s linear 8.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(9) {
-  --x-pos: 79%;
-  --y-pos: 4%;
+  --x-pos: 50%;
+  --y-pos: 29%;
   animation: appear 1s linear 9.75s forwards;
   animation-play-state: paused;
 }
 .target:nth-child(10) {
   --x-pos: 54%;
-  --y-pos: 26%;
+  --y-pos: 39%;
   animation: appear 1s linear 10.75s forwards;
   animation-play-state: paused;
 }
@@ -299,8 +299,9 @@ input[name=screen]#screen-2:checked ~ .console__screen--screen-3 {
 .title {
   color: var(--clr-accent);
   margin: 0;
+  text-align: center;
   margin-bottom: 1em;
-  font-size: 4.25rem;
+  font-size: calc(2.25rem + 3vmin);
   text-shadow: var(--text-shadow-light);
 }
 
@@ -311,7 +312,7 @@ input[name=screen]#screen-2:checked ~ .console__screen--screen-3 {
   color: var(--clr-light);
   border-radius: var(--border-radius);
   padding: 0.9em 2.9em;
-  font-size: 1.125rem;
+  font-size: calc(0.65rem + 0.75vmin);
   cursor: pointer;
   outline: 3px solid var(--clr-light);
   width: max-content;

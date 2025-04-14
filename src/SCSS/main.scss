@@ -199,8 +199,9 @@ input[name="screen"] {
 .title {
   color: var(--clr-accent);
   margin: 0;
+  text-align: center;
   margin-bottom: 1em;
-  font-size: 4.25rem;
+  font-size: calc(2.25rem + 3vmin);
   text-shadow: var(--text-shadow-light);
 }
 
@@ -211,7 +212,7 @@ input[name="screen"] {
   color: var(--clr-light);
   border-radius: var(--border-radius);
   padding: 0.9em 2.9em;
-  font-size: 1.125rem;
+  font-size: calc(0.65rem + 0.75vmin);
   cursor: pointer;
   outline: 3px solid var(--clr-light);
   width: max-content;
