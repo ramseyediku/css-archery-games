@@ -12,6 +12,9 @@ CSS Archer is a **mini web-based game** where you shoot down targets using only 
 ## 🚀 Live Demo on Codepen
 👉 View Live Demo on Codepen: https://codepen.io/Ramsey1120/full/NPWePMY
 
+![Image](https://github.com/user-attachments/assets/6ed46f39-4ae3-46b1-acdc-a36583d34e75)
+
+
 ## 💻 Technologies Used
 This project was built using the following technologies:
 - **Frontend:** HTML, SASS (Functions, Loops, Random Number Generation, Keyframes, and Animations)
