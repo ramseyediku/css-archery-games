@@ -1,72 +1,95 @@
-@use "reset";
+@use "sass:math";
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@75..125,300..700&display=swap");
 
+// ----------- ROOT VARIABLES -----------
 :root {
-  // variables and custom properties
   --clr-dark: hsl(240, 4%, 16%);
-  --clr-dark-console: hsl(0, 0%, 11%);
-
   --clr-light: hsl(0, 0%, 100%);
-  --clr-light-bg: hsl(0, 0%, 99%);
-
   --clr-accent: hsl(0, 100%, 63%);
-
+  --font-family: "Fredoka", sans-serif;
+  --line-height: 1.1;
   --border-radius: 35px;
-  --box-shadow: hsl(240, 30%, 28%, 0.25) 0px 50px 100px -20px,
-    hsl(0, 0%, 0%, 0.3) 0px 30px 60px -30px;
+  --box-shadow: hsl(0, 0%, 0%, 0.3) 0px 30px 60px -30px;
   --text-shadow-light: 2px 2px 2px var(--clr-light);
   --text-shadow-accent: 2px 2px 2px var(--clr-accent);
 }
 
-// keyframes for basic animations
-@keyframes appear {
-  from {
-    scale: (0);
-  }
-
-  to {
-    scale: (1);
-  }
-}
-
-@keyframes disappear {
-  from {
-    scale: (1);
-  }
-
-  to {
-    scale: (0);
-  }
-}
-
-// logic to find the total duration of the game (by taking the sum of the lifespan of each target)
-$no-of-targets: 10;
-$target-life-span: 1;
-$delay-between-targets: 0.75;
-
-@function gameDuration(
-  $no-of-targets,
-  $target-life-span,
-  $delay-between-targets
-) {
-  $targets-life-span: 0;
-
-  @for $o from 2 through $no-of-targets {
-    $targets-life-span: $o - 1 + $target-life-span + $delay-between-targets;
-  }
-
-  $game-duration: $target-life-span + $targets-life-span + 2;
-  @return $game-duration;
+// ----------- GLOBAL RESET & BASE -----------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
-  background-color: var(--clr-light-bg);
-  display: grid;
-  place-items: center;
-  height: 99vh;
   counter-reset: score;
+  overflow: hidden;
+  margin: 0;
+  height: 100vh;
+  line-height: var(--line-height);
+  font-family: var(--font-family);
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
 }
 
-// radio buttons will control which screen is visible, simulate the switching of screens and the movements of various elements in each game screen
+/* makes titles and headings wrap in a readable way */
+:where(h1, h2, h3, h4) {
+  text-wrap: balance;
+  line-height: var(--line-height);
+  font-family: var(--font-family);
+  overflow-wrap: break-word;
+  margin-block-end: 0;
+}
+
+//----------- KEYFRAMES -----------
+@keyframes moving {
+  0% {
+    left: 0%;
+    bottom: 10%;
+  }
+  15% {
+    left: 15%;
+    bottom: 85%;
+  }
+  30% {
+    left: 85%;
+    bottom: 90%;
+  }
+  45% {
+    left: 90%;
+    bottom: 20%;
+  }
+  60% {
+    left: 20%;
+    bottom: 5%;
+  }
+  75% {
+    left: 70%;
+    bottom: 70%;
+  }
+  90% {
+    left: 5%;
+    bottom: 50%;
+  }
+  100% {
+    left: 10%;
+    bottom: 15%;
+  }
+}
+
+@keyframes screenEnd {
+  100% {
+    opacity: 1;
+    pointer-events: revert;
+  }
+}
+
+// ----------- CONSTANTS -----------
+$no-of-targets: 7;
+$target-life-span: 15s;
+$game-duration: 20s;
+
+// ----------- SCREEN SWITCHING -----------
 input[name="screen"] {
   visibility: hidden;
 
@@ -77,52 +100,30 @@ input[name="screen"] {
     pointer-events: revert;
   }
 
-  &#screen-2:checked ~ .console__screen--screen-2 {
-    .target {
-      animation-play-state: running;
-    }
+  &#screen-2:checked ~ .console__screen--screen-2 .target {
+    opacity: 1;
+    animation-play-state: running;
   }
 
   &#screen-2:checked ~ .console__screen--screen-3 {
-    $duration: gameDuration(
-      $no-of-targets,
-      $target-life-span,
-      $delay-between-targets
-    );
-
     display: grid;
     place-items: center;
-    animation: screenEnd 0.5s #{$duration}s forwards;
-
-    @keyframes screenEnd {
-      100% {
-        opacity: 1;
-        pointer-events: revert;
-      }
-    }
+    animation: screenEnd 0.5s $game-duration forwards;
   }
 }
 
-// default styling for the game screens
+// ----------- CONSOLE SCREENS -----------
 .console {
-  width: 60%;
-  min-height: 60%;
-  margin-inline: auto;
-  border-radius: var(--border-radius);
-  background-color: var(--clr-dark-console);
-  padding: 1em;
+  width: 100%;
+  height: 100%;
   position: relative;
-  box-shadow: var(--box-shadow);
 
   &__screen {
     position: absolute;
-    inset: 2.5%;
+    inset: 0;
     background-image: url("../IMG/bgc.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    border-radius: calc(var(--border-radius) / 2);
-
-    // by default all screens should be turned off (opacity 0) and then turned on when needed
     opacity: 0;
     pointer-events: none;
 
@@ -135,60 +136,62 @@ input[name="screen"] {
       position: relative;
       width: 100%;
       height: 100%;
+      cursor: crosshair;
     }
   }
 }
 
-// styling the targets (which are radio buttons) and adding faux interactivity through animations and transitions
+// ----------- TARGETS -----------
 .target {
-  --target-width: 2em;
-  --target-spacing: 5px;
-
+  --target-spacing: 15px;
+  --width: 8em;
+  width: var(--width);
   position: absolute;
   appearance: none;
   background-color: var(--clr-accent);
-  width: var(--target-width);
-  cursor: pointer;
+  cursor: crosshair;
   aspect-ratio: 1/1;
   border-radius: 50%;
   margin: 0;
-  box-shadow: var(--clr-light) 0px 0px 0px var(--target-spacing),
-    var(--clr-accent) 0px 0px 0px calc(var(--target-spacing) * 2),
-    var(--clr-light) 0px 0px 0px calc(var(--target-spacing) * 3),
-    var(--clr-accent) 0px 0px 0px calc(var(--target-spacing) * 4);
-
-  left: var(--x-pos);
-  bottom: var(--y-pos);
-
-  scale: 0;
+  box-shadow:
+    inset var(--clr-accent) 0px 0px 0px var(--target-spacing),
+    inset var(--clr-light) 0px 0px 0px calc(var(--target-spacing) * 2),
+    inset var(--clr-accent) 0px 0px 0px calc(var(--target-spacing) * 3),
+    inset var(--clr-light) 0px 0px 0px calc(var(--target-spacing) * 4);
+  left: calc(var(--x-pos) * 1%);
+  bottom: calc(var(--y-pos) * 1%);
+  will-change: left, bottom;
+  opacity: 0;
+  animation-play-state: paused;
+  transition: opacity 200ms ease-in-out;
 
   @for $o from 1 through $no-of-targets {
-    // place targets in random positions
     &:nth-child(#{$o}) {
-      // for now hard code trasnlate x and y to magic numbers that will make sure the targetrs are within the screen
-      --x-pos: #{random((60) + 25)}%;
-      --y-pos: #{random((60) + 25)}%;
+      scale: math.random(1);
+      --x-pos: #{math.random(60) + 25};
+      --y-pos: #{math.random(60) + 25};
+      $target-delay: #{math.random(70) - 100}s;
+      $target-appearance-delay: #{$o}s;
 
-      @if $o == 1 {
-        $target-delay: #{$o}s;
-        animation: appear #{$target-life-span}s linear $target-delay forwards;
-      } @else {
-        $target-delay: #{$o - 1 + $target-life-span + $delay-between-targets}s;
-        animation: appear #{$target-life-span}s linear $target-delay forwards;
-      }
-      animation-play-state: paused;
+      animation: moving
+        $target-life-span
+        cubic-bezier(0.25, 0.1, 0.25, 1)
+        $target-delay
+        infinite
+        alternate;
+
+      transition-delay: $target-appearance-delay;
     }
   }
 
   &:checked {
-    animation-play-state: paused;
-    // increase score by 1 each time target is hit
+    animation-play-state: paused !important;
+    width: 0;
     counter-increment: score;
-    opacity: 0;
   }
 }
 
-// other elements that arent strictly game elements
+// ----------- UI ELEMENTS -----------
 .logo {
   width: 5em;
   position: absolute;
@@ -198,15 +201,26 @@ input[name="screen"] {
 
 .title {
   color: var(--clr-accent);
-  margin: 0;
+  margin: 0 0 1em;
   text-align: center;
-  margin-bottom: 1em;
   font-size: calc(2.25rem + 3vmin);
   text-shadow: var(--text-shadow-light);
+
+  svg & {
+    fill: #4472ca;
+    font-weight: 900;
+    font-size: 6rem;
+  }
+}
+
+.subtitle {
+  fill: #e6c229;
+  font-weight: 900;
+  font-size: 3rem;
 }
 
 .button {
-  margin: 0;
+  margin: 0 auto;
   display: block;
   background-color: var(--clr-accent);
   color: var(--clr-light);
@@ -216,7 +230,6 @@ input[name="screen"] {
   cursor: pointer;
   outline: 3px solid var(--clr-light);
   width: max-content;
-  margin-inline: auto;
   font-weight: 600;
   border: 0;
 }
@@ -227,8 +240,7 @@ input[name="screen"] {
   color: var(--clr-light);
   text-shadow: var(--text-shadow-accent);
 
-  // show of the final score
   &::after {
-    content: " " counter(score) "/10. Well done!";
+    content: "You hit " counter(score) " targets. Play again?";
   }
 }

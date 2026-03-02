@@ -1,18 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="src/IMG/target.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bowmasters</title>
-    <link rel="stylesheet" href="src/CSS/style.css" />
+    <title>CSS Archery</title>
+    <link lang="sass" rel="stylesheet" href="src/SCSS/main.scss" />
   </head>
   <body>
-    <img
-      class="logo"
-      src="src/IMG/target.png"
-      alt="this is the logo of the CSS mini game"
-    />
     <form method="get" action="" class="console">
       <input type="radio" name="screen" id="screen-1" checked />
       <input type="radio" name="screen" id="screen-2" />
@@ -20,8 +15,8 @@
 
       <section class="console__screen console__screen--screen-1">
         <div>
-          <h1 class="title">CSS Archery Games!</h1>
-          <label class="button" for="screen-2">Start Game</label>
+          <h1 class="title">CSS Archery <span>Game</span></h1>
+          <label class="button" for="screen-2">Start</label>
         </div>
       </section>
 
@@ -34,14 +29,11 @@
           <input type="radio" class="target" tabindex="-1" />
           <input type="radio" class="target" tabindex="-1" />
           <input type="radio" class="target" tabindex="-1" />
-          <input type="radio" class="target" tabindex="-1" />
-          <input type="radio" class="target" tabindex="-1" />
-          <input type="radio" class="target" tabindex="-1" />
         </div>
       </section>
 
       <section class="console__screen console__screen--screen-3">
-        <div class="score">Score</div>
+        <div class="score"></div>
         <button class="button" type="submit">Restart!</button>
       </section>
     </form>
