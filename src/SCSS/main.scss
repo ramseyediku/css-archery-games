@@ -257,6 +257,11 @@ input[name="screen"] {
   }
 }
 
+.protip {
+  text-align: center;
+  font-size: 2rem;
+}
+
 .score {
   font-size: calc(3rem + 3vmin);
   &::before {
