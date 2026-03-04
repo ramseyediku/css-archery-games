@@ -1,17 +1,20 @@
 @use "sass:math";
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@75..125,300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barrio&display=swap");
 
 // ----------- ROOT VARIABLES -----------
 :root {
-  --clr-dark: hsl(240, 4%, 16%);
   --clr-light: hsl(0, 0%, 100%);
-  --clr-accent: hsl(0, 100%, 63%);
-  --font-family: "Fredoka", sans-serif;
-  --line-height: 1.1;
-  --border-radius: 35px;
-  --box-shadow: hsl(0, 0%, 0%, 0.3) 0px 30px 60px -30px;
+  --clr-dark: hsl(0, 0%, 20%);
+  --clr-accent: hsl(219, 56%, 53%);
+  --clr-accent-2: hsl(49, 79%, 53%);
+  --clr-target: hsl(0, 100%, 63%);
+
+  --font-family: "Barrio", system-ui;
+  --line-height: 1.3;
+
+  --border-radius: 3rem;
+
   --text-shadow-light: 2px 2px 2px var(--clr-light);
-  --text-shadow-accent: 2px 2px 2px var(--clr-accent);
 }
 
 // ----------- GLOBAL RESET & BASE -----------
@@ -30,15 +33,7 @@ body {
   font-family: var(--font-family);
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
-}
-
-/* makes titles and headings wrap in a readable way */
-:where(h1, h2, h3, h4) {
-  text-wrap: balance;
-  line-height: var(--line-height);
-  font-family: var(--font-family);
-  overflow-wrap: break-word;
-  margin-block-end: 0;
+  user-select: none;
 }
 
 //----------- KEYFRAMES -----------
@@ -86,8 +81,8 @@ body {
 
 // ----------- CONSTANTS -----------
 $no-of-targets: 7;
-$target-life-span: 15s;
-$game-duration: 20s;
+$target-life-span: 17.5s;
+$game-duration: 22.5s;
 
 // ----------- SCREEN SWITCHING -----------
 input[name="screen"] {
@@ -107,7 +102,7 @@ input[name="screen"] {
 
   &#screen-2:checked ~ .console__screen--screen-3 {
     display: grid;
-    place-items: center;
+    place-content: center;
     animation: screenEnd 0.5s $game-duration forwards;
   }
 }
@@ -121,7 +116,7 @@ input[name="screen"] {
   &__screen {
     position: absolute;
     inset: 0;
-    background-image: url("../IMG/bgc.jpg");
+    background-image: url("../assets/bgc.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0;
@@ -143,21 +138,21 @@ input[name="screen"] {
 
 // ----------- TARGETS -----------
 .target {
-  --target-spacing: 15px;
   --width: 8em;
+  --target-spacing: 20px;
   width: var(--width);
   position: absolute;
   appearance: none;
-  background-color: var(--clr-accent);
+  background-color: var(--clr-target);
   cursor: crosshair;
   aspect-ratio: 1/1;
   border-radius: 50%;
   margin: 0;
   box-shadow:
-    inset var(--clr-accent) 0px 0px 0px var(--target-spacing),
+    inset var(--clr-target) 0px 0px 0px var(--target-spacing),
     inset var(--clr-light) 0px 0px 0px calc(var(--target-spacing) * 2),
-    inset var(--clr-accent) 0px 0px 0px calc(var(--target-spacing) * 3),
-    inset var(--clr-light) 0px 0px 0px calc(var(--target-spacing) * 4);
+    inset var(--clr-target) 0px 0px 0px calc(var(--target-spacing) * 3);
+
   left: calc(var(--x-pos) * 1%);
   bottom: calc(var(--y-pos) * 1%);
   will-change: left, bottom;
@@ -167,7 +162,6 @@ input[name="screen"] {
 
   @for $o from 1 through $no-of-targets {
     &:nth-child(#{$o}) {
-      scale: math.random(1);
       --x-pos: #{math.random(60) + 25};
       --y-pos: #{math.random(60) + 25};
       $target-delay: #{math.random(70) - 100}s;
@@ -186,37 +180,59 @@ input[name="screen"] {
 
   &:checked {
     animation-play-state: paused !important;
-    width: 0;
+    opacity: 0.75 !important;
+    transition: opacity 5ms ease-in-out;
     counter-increment: score;
+
+    // when target is clicked show arrow sticking out of it
+
+    // arrow
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 0%;
+      left: 50%;
+      width: 5rem;
+      height: 5.5px;
+      background: var(--clr-dark);
+      transform: rotate(-45deg);
+      transform-origin: left center;
+      border-radius: var(--border-radius);
+    }
+
+    // arrow tail
+    &::before {
+      content: "";
+      position: absolute;
+      top: -12%;
+      right: -14.5%;
+      width: 1.5rem;
+      aspect-ratio: 1/1;
+      background: var(--clr-accent-2);
+      border-radius: var(--border-radius);
+      z-index: 1;
+      transform: rotate(45deg);
+      clip-path: polygon(0 0, 51% 33%, 100% 0, 100% 44%, 53% 100%, 0 46%);
+    }
   }
 }
 
-// ----------- UI ELEMENTS -----------
-.logo {
-  width: 5em;
-  position: absolute;
-  top: 1%;
-  left: 1%;
-}
-
+// ----------- OTHER UI ELEMENTS -----------
 .title {
   color: var(--clr-accent);
   margin: 0 0 1em;
   text-align: center;
-  font-size: calc(2.25rem + 3vmin);
+  font-size: calc(5rem + 3vmin);
   text-shadow: var(--text-shadow-light);
+  text-wrap: balance;
+  line-height: var(--line-height);
+  font-family: var(--font-family);
+  overflow-wrap: break-word;
 
-  svg & {
-    fill: #4472ca;
-    font-weight: 900;
-    font-size: 6rem;
+  span {
+    color: var(--clr-accent-2);
   }
-}
-
-.subtitle {
-  fill: #e6c229;
-  font-weight: 900;
-  font-size: 3rem;
 }
 
 .button {
@@ -225,22 +241,25 @@ input[name="screen"] {
   background-color: var(--clr-accent);
   color: var(--clr-light);
   border-radius: var(--border-radius);
-  padding: 0.9em 2.9em;
-  font-size: calc(0.65rem + 0.75vmin);
+  padding: 0.5em 1.25em;
+  font-size: calc(1.75rem + 0.5vmin);
   cursor: pointer;
+  font-family: var(--font-family);
   outline: 3px solid var(--clr-light);
   width: max-content;
-  font-weight: 600;
   border: 0;
+
+  transition: all 350ms ease-in-out;
+
+  &:hover,
+  &:focus-within {
+    transform: translateY(-2px);
+  }
 }
 
 .score {
-  font-weight: 700;
-  font-size: 3rem;
-  color: var(--clr-light);
-  text-shadow: var(--text-shadow-accent);
-
-  &::after {
-    content: "You hit " counter(score) " targets. Play again?";
+  font-size: calc(3rem + 3vmin);
+  &::before {
+    content: "Time's up! You hit " counter(score) " target(s).";
   }
 }
